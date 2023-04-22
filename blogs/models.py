@@ -18,7 +18,7 @@ class Category(models.Model):
         return reverse('home')
 
 class Post(models.Model):
-    category = models.CharField(max_length=100, default='IT') # категория поста со значением "IT" по умолчанию
+    category = models.CharField(max_length=100, default='it') # категория поста со значением "IT" по умолчанию
     title = models.CharField(max_length=100) # название поста
     title_tag = models.CharField(max_length=100, default='Blog App')
     author = models.ForeignKey(User, on_delete=models.CASCADE) # при удалении темы, все записи по теме также удаляются - это каскадное удаление

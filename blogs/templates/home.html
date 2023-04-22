@@ -9,7 +9,7 @@
     <li><a href="{% url 'article-detail' post.pk %}"><strong>{{ post.title }}</strong></a> by 
         {{ post.author.first_name }}
         {{ post.author.last_name}} - 
-        <a href="{% url 'category' post.category %}">{{ post.category }}</a> 
+        <a href="{% url 'category' post.category|slugify %}">{{ post.category }}</a> 
         - {{ post.date_added }} 
         
         {% if user.is_authenticated %}

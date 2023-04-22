@@ -17,9 +17,10 @@ class HomeView(ListView):
     ordering = ['-id'] # минус выводит посты на домашней странице в обратном порядке: от самого нового к самому старому
 
 def CategoryView(request, categories):
-    category_posts = Post.objects.filter(category=categories)
+    """Отображение категорий постов."""
+    category_posts = Post.objects.filter(category=categories.replace('-', ' '))
     return render(request, 'categories.html', 
-                  {'categories': categories, 
+                  {'categories': categories.title().replace('-', ' '), 
                    'category_posts': category_posts})
 
 class ArticleDetailView(DetailView):

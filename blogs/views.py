@@ -16,6 +16,12 @@ class HomeView(ListView):
     template_name = 'home.html'
     ordering = ['-id'] # минус выводит посты на домашней странице в обратном порядке: от самого нового к самому старому
 
+def CategoryView(request, categories):
+    category_posts = Post.objects.filter(category=categories)
+    return render(request, 'categories.html', 
+                  {'categories': categories, 
+                   'category_posts': category_posts})
+
 class ArticleDetailView(DetailView):
     """Отображение детальной информации статьи в блоге."""
     model = Post

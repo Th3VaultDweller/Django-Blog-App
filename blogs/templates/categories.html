@@ -2,14 +2,15 @@
 
 {% block content %}
 
-<h1>Recent Posts</h1>
+{% if category_posts %}
+
+<h1>All {{ categories }} related posts</h1>
 <br/><br/>
-<ul>
-{% for post in object_list %}
+
+{% for post in category_posts %}
     <li><a href="{% url 'article-detail' post.pk %}"><strong>{{ post.title }}</strong></a> by 
         {{ post.author.first_name }}
-        {{ post.author.last_name}} - 
-        <a href="{% url 'category' post.category %}">{{ post.category }}</a> 
+        {{ post.author.last_name}} 
         - {{ post.date_added }} 
         
         {% if user.is_authenticated %}
@@ -26,6 +27,11 @@
         <p>{{ post.body|slice:":100" }}</p>
     </li>
 {% endfor %}
-</ul>
+
+{% else %}
+
+<h1>The page does not exist...</h1>
+
+{% endif %}
 
 {% endblock content %}

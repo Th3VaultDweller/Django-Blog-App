@@ -12,7 +12,7 @@
     by {{ post.author.first_name}} {{ post.author.last_name }}
     <br/>
     {% if user.is_authenticated %}
-        {% if user.id == 1 %}
+        {% if user.id == 1 %} <!-- Admin -->
             <a href="{% url 'update_post' post.pk %}">Edit & Update Post</a>
             or
             <a href="{% url 'delete_post' post.pk %}">Delete Post</a>

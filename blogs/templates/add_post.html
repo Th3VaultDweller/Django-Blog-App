@@ -17,6 +17,12 @@ Blog App - Create a New Blog Post {{ post.title }}
             <button class="btn btn-primary">Post</button>
         </form>
     </div>
+    
+    <!-- JavaScript-->
+    <script>
+        var name = "{{ user.id }}";
+        document.getElementById("User").value = name;
+    </script>
 
 {% else %}
 

@@ -8,7 +8,7 @@ Blog App - Edit & Update Post - {{ post.title }}
 
 {% if user.is_authenticated %}
     
-    {% if user.id == 1 %}
+    {% if user.id == 1 %} <!-- Admin -->
         <h1>Edit & Update Post</h1>
         <br/><br/>
         <div class="mb-3">

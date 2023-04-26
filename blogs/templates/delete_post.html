@@ -8,7 +8,7 @@ Blog App - Delete Post - {{ post.title }}
 
 {% if user.is_authenticated %}
     
-    {% if user.id == 1 %}
+    {% if user.id == 1 %} <!-- Admin -->
         <h1>Delete Post</h1>
         <br/>
         <h3>Are you sure you want to delete "{{ post.title }}" post?</h3>

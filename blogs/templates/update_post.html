@@ -7,17 +7,30 @@ Blog App - Edit & Update Post - {{ post.title }}
 {% block content %}
 
 {% if user.is_authenticated %}
-
-    <h1>Edit & Update Post</h1>
-
-    <br/><br/>
-    <div class="mb-3">
-        <form method="POST">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button class="btn btn-primary">Update</button>
-        </form>
-    </div>
+    
+    {% if user.id == 1 %}
+        <h1>Edit & Update Post</h1>
+        <br/><br/>
+        <div class="mb-3">
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button class="btn btn-primary">Update</button>
+            </form>
+        </div>
+    {% else %}
+        {% if user.id == post.author.id %}
+            <h1>Edit & Update Post</h1>
+            <br/><br/>
+            <div class="mb-3">
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button class="btn btn-primary">Update</button>
+                </form>
+            </div>
+        {% endif %}
+    {% endif %}
 
 {% else %}
 

@@ -13,14 +13,25 @@
         - {{ post.date_added }} 
         
         {% if user.is_authenticated %}
-
-            <a href="{% url 'update_post' post.pk %}">
-                <small>Edit & Update Post</small>
-            </a>
-            or
-            <a href="{% url 'delete_post' post.pk %}">
-            <small>Delete Post</small>
-            </a>
+            {% if user.id == 1 %} <!-- Admin -->
+                <a href="{% url 'update_post' post.pk %}">
+                        <small>Edit & Update Post</small>
+                </a>
+                or
+                <a href="{% url 'delete_post' post.pk %}">
+                <small>Delete Post</small>
+                </a>
+            {% else %}
+                {% if user.id == post.author.id %}
+                    <a href="{% url 'update_post' post.pk %}">
+                            <small>Edit & Update Post</small>
+                    </a>
+                    or
+                    <a href="{% url 'delete_post' post.pk %}">
+                    <small>Delete Post</small>
+                    </a>
+                {% endif %}
+            {% endif %}
         {% endif %}
         <br/><br/>
         <p>{{ post.body|slice:":100" }}</p>

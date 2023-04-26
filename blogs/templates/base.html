@@ -65,9 +65,9 @@
                   <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                   <button class="btn btn-outline-light" type="submit">Search</button>
                 </form>
-
                 <li class="nav-item">
-                  <a class="nav-link active" href="{% url 'logout' %}">Sign out</a>
+                  <a class="nav-link active" href="{% url 'logout' %}">
+                    {{ user.first_name }} {{ user.last_name }} - Sign out</a>
                 </li>
 
               {% else %}

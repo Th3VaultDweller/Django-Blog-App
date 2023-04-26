@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Post, Category
 from .forms import PostForm, UpdatePostForm
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
+from django.http import HttpResponseRedirect
 
 # Create your views here.
 
@@ -54,9 +55,12 @@ class ArticleDetailView(DetailView):
 
     def get_context_data(self, *args, **kwargs):
         """Отображение всех категорий постов в dropdown меню при нажатии на пост."""
+        stuff = get_object_or_404(Post, id=self.kwargs['pk'])
+        total_likes = stuff.total_likes
         category_menu = Category.objects.all() # достаёт все названия категорий из Category.models.py
         context = super(ArticleDetailView, self).get_context_data(*args, **kwargs)
         context ['category_menu'] = category_menu
+        context['total_likes'] = total_likes
         return context
 
 class AddPostView(CreateView):
@@ -116,7 +120,11 @@ class DeletePostView(DeleteView):
         context ['category_menu'] = category_menu
         return context
 
-
+def LikeView(request, pk):
+    """Позволяет лайкать посты в блоге."""
+    post = Post.objects.get(id=pk)
+    post.likes.add(request.user)
+    return HttpResponseRedirect(reverse('article-detail', args=[str(pk)]))
 
 
 

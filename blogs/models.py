@@ -24,7 +24,12 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE) # при удалении темы, все записи по теме также удаляются - это каскадное удаление
     body = models.TextField(max_length=1000) # текст поста
     date_added = models.DateTimeField(auto_now_add=True)
-    
+    likes = models.ManyToManyField(User, related_name='blog_posts') # кнопка лайка
+
+    def total_likes(self):
+        """Считает, сколько всего было поставлено лайков под постом."""
+        return self.likes.count()
+
     def __str__(self):
         return self.title + ' | ' + str(self.author)
     

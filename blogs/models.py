@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
+from ckeditor.fields import RichTextField
 
 # Create your models here.
 
@@ -22,7 +23,8 @@ class Post(models.Model):
     title = models.CharField(max_length=100) # название поста
     title_tag = models.CharField(max_length=100, default='Blog App')
     author = models.ForeignKey(User, on_delete=models.CASCADE) # при удалении темы, все записи по теме также удаляются - это каскадное удаление
-    body = models.TextField(max_length=1000) # текст поста
+    # body = models.TextField(max_length=1000) # текст поста
+    body = RichTextField(blank=True, null=True) # "богатое" поле для написания поста
     date_added = models.DateTimeField(auto_now_add=True)
     likes = models.ManyToManyField(User, related_name='blog_posts') # кнопка лайка
 

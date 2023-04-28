@@ -33,8 +33,9 @@
                 {% endif %}
             {% endif %}
         {% endif %}
+        <br/>
+        {{ post.snippet }}
         <br/><br/>
-        <p>{{ post.body|slice:":100" }}</p>
     </li>
 {% endfor %}
 </ul>

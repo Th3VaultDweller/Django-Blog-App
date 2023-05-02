@@ -2,7 +2,8 @@ from typing import Any, Optional
 from django.db import models
 from django.shortcuts import render
 from django.views import generic
-from django.contrib.auth.forms import UserChangeForm
+from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
+from django.contrib.auth.views import PasswordChangeView
 from django.urls import reverse_lazy
 from .forms import SignUpForm, EditProfileForm
 
@@ -23,3 +24,11 @@ class UserEditView(generic.UpdateView):
     def get_object(self):
         return self.request.user
 
+class PasswordsChangeView(PasswordChangeView):
+    """Форма для смены пароля учётной записи в блоге."""
+    form_class = PasswordChangeForm
+    success_url = reverse_lazy('password_success')
+
+def password_success(request):
+    """Сообщает пользователю об удачной смене пароля."""
+    return render (request, 'registration/password_success.html', {})

@@ -12,6 +12,7 @@ Blog App - Create a New Blog Post {{ post.title }}
     <br/><br/>
     <div class="mb-3">
         <form method="POST" enctype="multipart/form-data">
+            <h4>Only small image is supported as a header to the post.</h4>
             {% csrf_token %}
             {{ form.media }}
             {{ form.as_p }}

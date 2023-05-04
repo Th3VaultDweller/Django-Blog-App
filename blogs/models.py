@@ -5,6 +5,14 @@ from ckeditor.fields import RichTextField
 
 # Create your models here.
 
+class UserProfile(models.Model):
+    """Репрезентация профиля пользователя"""
+    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
+    bio = models.TextField()
+    
+    def __str__(self):
+        return str(self.user)
+
 class Category(models.Model):
     """Категория поста в блоге."""
     name = models.CharField(max_length=100) # имя категории

@@ -11,7 +11,7 @@ class PostForm(forms.ModelForm):
     """Создание формы для добавления нового поста в блог."""
     class Meta:
         model = Post
-        fields = ('category', 'title', 'author', 'body', 'snippet')
+        fields = ('category', 'title', 'header_image', 'author', 'body', 'snippet')
 
         widgets = {
             'category': forms.Select(choices=choice_list, attrs={'class': 'form-control'}),
@@ -26,7 +26,7 @@ class UpdatePostForm(forms.ModelForm):
     """Создание формы для внесения изменений в существующий пост."""
     class Meta:
         model = Post
-        fields = ('category', 'title', 'body', 'snippet')
+        fields = ('category', 'title', 'header_image', 'body', 'snippet')
 
         widgets = {
             'category': forms.Select(choices=choice_list, attrs={'class': 'form-control'}),

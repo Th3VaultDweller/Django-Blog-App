@@ -12,7 +12,7 @@ Blog App - Edit & Update Post - {{ post.title }}
         <h1>Edit & Update Post</h1>
         <br/><br/>
         <div class="mb-3">
-            <form method="POST">
+            <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form.media }}
                 {{ form.as_p }}

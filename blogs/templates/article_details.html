@@ -23,18 +23,27 @@
                     <div class="card-body">
                       <h5 class="card-title">
                         {{ post.author.first_name}} {{ post.author.last_name }}</h5>
+                        <p class="card-text">
+                            <small class="text-body-secondary">
+                                {% if post.author.userprofile.github_url %}
+                                    <a href='{{ post.author.userprofile.github_url }}'>GitHub</a>
+                                {% endif %}
+
+                                {% if post.author.userprofile.vk_url %} 
+                                    | <a href='{{ post.author.userprofile.vk_url }}'>VK</a>
+                                {% endif %}
+
+                                {% if post.author.userprofile.steam_url %}
+                                    | <a href='{{ post.author.userprofile.steam_url }}'>Steam</a>
+                                {% endif %}
+
+                                {% if post.author.userprofile.spotify_url %}
+                                    | <a href='{{ post.author.userprofile.spotify_url }}'>Spotify</a>
+                                {% endif %}
+                            </small>
+                        </p>
                       <p class="card-text">
-                        GitHub: {{ post.author.userprofile.github_url }}
-                        <br/>
-                        VK: {{ post.author.userprofile.vk_url}}
-                        <br/>
-                        Steam: {{ post.author.userprofile.steam_url }}
-                        <br/>
-                        Spotify: {{ post.author.userprofile.spotify_url }}
-                      </p>
-                      <p class="card-text">
-                        <small class="text-body-secondary">Last updated 3 mins ago
-                        </small>
+                        I'm a Python and Django enthusiast.
                       </p>
                     </div>
                   </div>

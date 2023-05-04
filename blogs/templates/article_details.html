@@ -8,11 +8,39 @@
 {% block content %}
 
 <h1>{{ post.title }}</h1>
-<small>
-    by {{ post.author.first_name}} {{ post.author.last_name }}
+<!-- <small>
+    by {{ post.author.first_name}} {{ post.author.last_name }} -->
     <br/>
     {% if user.is_authenticated %}
         {% if user.id == 1 %} <!-- Admin -->
+            {% if post.author.userprofile.profile_picture %}
+            <div class="card mb-3">
+                <div class="row g-0">
+                  <div class="col-md-2">
+                    <img src="{{ post.author.userprofile.profile_picture.url }}" class="rounded" width="200" height="200">
+                  </div>
+                  <div class="col-md-10">
+                    <div class="card-body">
+                      <h5 class="card-title">
+                        {{ post.author.first_name}} {{ post.author.last_name }}</h5>
+                      <p class="card-text">
+                        GitHub: {{ post.author.userprofile.github_url }}
+                        <br/>
+                        VK: {{ post.author.userprofile.vk_url}}
+                        <br/>
+                        Steam: {{ post.author.userprofile.steam_url }}
+                        <br/>
+                        Spotify: {{ post.author.userprofile.spotify_url }}
+                      </p>
+                      <p class="card-text">
+                        <small class="text-body-secondary">Last updated 3 mins ago
+                        </small>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% endif%}
             <a href="{% url 'update_post' post.pk %}">Edit & Update Post</a>
             or
             <a href="{% url 'delete_post' post.pk %}">Delete Post</a>

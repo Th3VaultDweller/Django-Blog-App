@@ -86,7 +86,7 @@ class AddPostView(CreateView):
         return context
     
 class AddCategoryView(CreateView):
-    """Создание нового поста в блоге."""
+    """Создание новой категории в блоге."""
     model = Category
     # form_class = PostForm
     template_name = 'add_category.html'

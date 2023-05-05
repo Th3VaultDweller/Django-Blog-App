@@ -12,6 +12,7 @@ class UserProfile(models.Model):
     profile_picture = models.ImageField(null=True, 
                                      blank=True, 
                                      upload_to='images/profile_pictures')
+    email_address = models.CharField(max_length=255, null=True, blank=True)
     website_url = models.CharField(max_length=255, null=True, blank=True)
     vk_url = models.CharField(max_length=255, null=True, blank=True)
     twitter_url = models.CharField(max_length=255, null=True, blank=True)

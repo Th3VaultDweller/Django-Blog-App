@@ -39,6 +39,10 @@
                             {% if post.author.userprofile.spotify_url %}
                                 | <a href='{{ post.author.userprofile.spotify_url }}'>Spotify</a>
                             {% endif %}
+                            <br/>
+                            {% if post.author.userprofile.email_address %}
+                                {{ post.author.userprofile.email_address }}
+                            {% endif %}
                         </small>
                     </p>
                 <p class="card-text">
@@ -76,6 +80,10 @@
 
                                 {% if post.author.userprofile.spotify_url %}
                                     | <a href='{{ post.author.userprofile.spotify_url }}'>Spotify</a>
+                                {% endif %}
+                                <br/>
+                                {% if post.author.userprofile.email_address %}
+                                    {{ post.author.userprofile.email_address }}
                                 {% endif %}
                             </small>
                         </p>

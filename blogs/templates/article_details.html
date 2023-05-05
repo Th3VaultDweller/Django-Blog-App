@@ -33,8 +33,9 @@
                 </h5>
                     <p class="card-text">
                         <small class="text-body-secondary">
+                            <a href="{% url 'user_profile_page' post.author.userprofile.id %}">Profile</a>
                             {% if post.author.userprofile.github_url %}
-                                <a href='{{ post.author.userprofile.github_url }}'>GitHub</a>
+                               | <a href='{{ post.author.userprofile.github_url }}'>GitHub</a>
                             {% endif %}
 
                             {% if post.author.userprofile.vk_url %} 

@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block title %} 
 {{ post.title_tag}} - {{ post.title }} 
 {% endblock title %}
@@ -8,16 +8,20 @@
 {% block content %}
 
 <h1>{{ post.title }}</h1>
-<!-- <small>
-    by {{ post.author.first_name}} {{ post.author.last_name }} -->
-    <br/>
-    {% if user.is_authenticated %}
+<br/>
+{% if user.is_authenticated %}
+    <div class="card mb-3">
         {% if post.author.userprofile.profile_picture %}
-        <div class="card mb-3">
             <div class="row g-0">
             <div class="col-md-2">
                 <img src="{{ post.author.userprofile.profile_picture.url }}" class="rounded" width="200" height="200">
             </div>
+        {% else %}
+            <div class="row g-0">
+            <div class="col-md-2">
+                <img src="{% static 'blogs/images/default_profile_picture.png' %}" class="rounded" width="200" height="200">
+            </div>
+        {% endif %}
             <div class="col-md-10">
                 <div class="card-body">
                 <h5 class="card-title">
@@ -57,20 +61,19 @@
             </div>
             </div>
         </div>
-        {% endif%}
-        {% if user.id == 1 %} <!-- Admin -->
+    {% if user.id == 1 %} <!-- Admin -->
+        <a href="{% url 'update_post' post.pk %}">Edit & Update Post</a>
+        or
+        <a href="{% url 'delete_post' post.pk %}">Delete Post</a>
+    
+    {% else %}
+        {% if user.id == post.author.id %}
             <a href="{% url 'update_post' post.pk %}">Edit & Update Post</a>
             or
             <a href="{% url 'delete_post' post.pk %}">Delete Post</a>
-        
-        {% else %}
-            {% if user.id == post.author.id %}
-                <a href="{% url 'update_post' post.pk %}">Edit & Update Post</a>
-                or
-                <a href="{% url 'delete_post' post.pk %}">Delete Post</a>
-            {% endif %}
         {% endif %}
     {% endif %}
+{% endif %}
 </small>
 <br/>
 <hr>

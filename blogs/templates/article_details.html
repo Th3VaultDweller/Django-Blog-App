@@ -12,6 +12,43 @@
     by {{ post.author.first_name}} {{ post.author.last_name }} -->
     <br/>
     {% if user.is_authenticated %}
+        {% if post.author.userprofile.profile_picture %}
+        <div class="card mb-3">
+            <div class="row g-0">
+            <div class="col-md-2">
+                <img src="{{ post.author.userprofile.profile_picture.url }}" class="rounded" width="200" height="200">
+            </div>
+            <div class="col-md-10">
+                <div class="card-body">
+                <h5 class="card-title">
+                    {{ post.author.first_name}} {{ post.author.last_name }}</h5>
+                    <p class="card-text">
+                        <small class="text-body-secondary">
+                            {% if post.author.userprofile.github_url %}
+                                <a href='{{ post.author.userprofile.github_url }}'>GitHub</a>
+                            {% endif %}
+
+                            {% if post.author.userprofile.vk_url %} 
+                                | <a href='{{ post.author.userprofile.vk_url }}'>VK</a>
+                            {% endif %}
+
+                            {% if post.author.userprofile.steam_url %}
+                                | <a href='{{ post.author.userprofile.steam_url }}'>Steam</a>
+                            {% endif %}
+
+                            {% if post.author.userprofile.spotify_url %}
+                                | <a href='{{ post.author.userprofile.spotify_url }}'>Spotify</a>
+                            {% endif %}
+                        </small>
+                    </p>
+                <p class="card-text">
+                    {{ post.author.userprofile.bio }}
+                </p>
+                </div>
+            </div>
+            </div>
+        </div>
+        {% endif%}
         {% if user.id == 1 %} <!-- Admin -->
             {% if post.author.userprofile.profile_picture %}
             <div class="card mb-3">
@@ -43,7 +80,7 @@
                             </small>
                         </p>
                       <p class="card-text">
-                        I'm a Python and Django enthusiast.
+                        {{ post.author.userprofile.bio }}
                       </p>
                     </div>
                   </div>

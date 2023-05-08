@@ -1,0 +1,20 @@
+{% extends "base.html" %}   
+
+{% block title %} 
+Blog App - Registration
+{% endblock title %}
+
+{% block content %}
+
+<h1>Don't have an account? Sign up now!</h1>
+
+<br/><br/>
+<div class="mb-3">
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-primary">Register</button>
+    </form>
+</div>
+
+{% endblock content %}

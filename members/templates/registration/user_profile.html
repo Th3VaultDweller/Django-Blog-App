@@ -1,0 +1,63 @@
+{% extends "base.html" %}   
+{% load static %}
+{% block content %}
+
+<h1>{{ page_user }}'s User Profile</h1>
+<br/>
+    <div class="card mb-3">
+        {% if page_user.profile_picture %}
+            <div class="row g-0">
+            <div class="col-md-2">
+                <img src="{{ page_user.profile_picture.url }}" class="rounded" width="200" height="200">
+            </div>
+        {% else %}
+            <div class="row g-0">
+            <div class="col-md-2">
+                <img src="{% static 'blogs/images/default_profile_picture.png' %}" class="rounded" width="200" height="200">
+            </div>
+        {% endif %}
+            <div class="col-md-10">
+                <div class="card-body">
+                <h5 class="card-title">
+                    {% if page_user.first_name %}
+                        {{ page_user.first_name}}
+                    {% endif %}
+                    {% if page_user.nickname %}
+                        "{{ page_user.nickname }}"
+                    {% endif %}
+                    {% if page_user.last_name %}
+                        {{ page_user.last_name }}
+                    {% endif %}
+                </h5>
+                    <p class="card-text">
+                        <small class="text-body-secondary">
+                            {% if page_user.github_url %}
+                               <a href='{{ page_user.github_url }}'>GitHub</a>
+                            {% endif %}
+
+                            {% if page_user.vk_url %} 
+                                | <a href='{{ page_user.vk_url }}'>VK</a>
+                            {% endif %}
+
+                            {% if page_user.steam_url %}
+                                | <a href='{{ page_user.steam_url }}'>Steam</a>
+                            {% endif %}
+
+                            {% if page_user.spotify_url %}
+                                | <a href='{{ page_user.spotify_url }}'>Spotify</a>
+                            {% endif %}
+                            <br/>
+                            {% if page_user.email_address %}
+                                {{ page_user.email_address }}
+                            {% endif %}
+                        </small>
+                    </p>
+                <p class="card-text">
+                    {{ page_user.bio }}
+                </p>
+                </div>
+            </div>
+            </div>
+        </div>
+
+{% endblock content %}

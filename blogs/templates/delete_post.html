@@ -1,0 +1,45 @@
+{% extends "base.html" %}   
+
+{% block title %} 
+Blog App - Delete Post - {{ post.title }} 
+{% endblock title %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+    
+    {% if user.id == 1 %} <!-- Admin -->
+        <h1>Delete Post</h1>
+        <br/>
+        <h3>Are you sure you want to delete "{{ post.title }}" post?</h3>
+
+        <br/><br/>
+        <div class="mb-3">
+            <form method="POST">
+                {% csrf_token %}
+                <button class="btn btn-primary">Delete</button>
+            </form>
+        </div>
+    {% else %}
+        {% if user.id == post.author.id %}
+            <h1>Delete Post</h1>
+            <br/>
+            <h3>Are you sure you want to delete "{{ post.title }}" post?</h3>
+
+            <br/><br/>
+            <div class="mb-3">
+                <form method="POST">
+                    {% csrf_token %}
+                    <button class="btn btn-primary">Delete</button>
+                </form>
+            </div>
+        {% endif %}
+    {% endif %}
+ 
+{% else %}
+
+<strong> You have to be logged in in order to delete posts!</strong>
+
+{% endif %}
+
+{% endblock content %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}   
+
+{% block title %} 
+Blog App - Create a New Blog Category {{ post.title }} 
+{% endblock title %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+
+    <h1>Add Category</h1>
+
+    <br/><br/>
+    You have to use lowercase letters!
+    <br/><br/>
+    <div class="mb-3">
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn btn-primary">Add</button>
+        </form>
+    </div>
+
+{% else %}
+
+<strong> You have to be logged in in order to add categories!</strong>
+
+{% endif %}
+
+{% endblock content %}

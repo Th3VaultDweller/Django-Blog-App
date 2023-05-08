@@ -13,6 +13,8 @@ class UserProfile(models.Model):
                                      blank=True, 
                                      upload_to='images/profile_pictures')
     nickname = models.CharField(max_length=255, null=True, blank=True)
+    first_name = models.CharField(max_length=255, null=True, blank=True)
+    last_name = models.CharField(max_length=255, null=True, blank=True)
     email_address = models.CharField(max_length=255, null=True, blank=True)
     website_url = models.CharField(max_length=255, null=True, blank=True)
     vk_url = models.CharField(max_length=255, null=True, blank=True)

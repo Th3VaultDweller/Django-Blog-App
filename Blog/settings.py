@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     # Мои приложения
     'blogs',
     'members',
+    'ckeditor',
     # Приложения по умолчанию
     'django.contrib.admin',
     'django.contrib.auth',

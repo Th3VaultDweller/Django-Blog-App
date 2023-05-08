@@ -1,0 +1,37 @@
+{% extends "base.html" %}   
+
+{% block content %}
+
+{% if category_posts %}
+
+<h1>All {{ categories }} related posts</h1>
+<br/><br/>
+
+{% for post in category_posts %}
+    <li><a href="{% url 'article-detail' post.pk %}"><strong>{{ post.title }}</strong></a> by 
+        {{ post.author.first_name }}
+        {{ post.author.last_name}} 
+        - {{ post.date_added }} 
+        
+        {% if user.is_authenticated %}
+
+            <a href="{% url 'update_post' post.pk %}">
+                <small>Edit & Update Post</small>
+            </a>
+            or
+            <a href="{% url 'delete_post' post.pk %}">
+            <small>Delete Post</small>
+            </a>
+        {% endif %}
+        <br/><br/>
+        <p>{{ post.body|slice:":100" }}</p>
+    </li>
+{% endfor %}
+
+{% else %}
+
+<h1>The page does not exist...</h1>
+
+{% endif %}
+
+{% endblock content %}

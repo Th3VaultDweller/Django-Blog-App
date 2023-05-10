@@ -1,24 +1,30 @@
 {% extends "base.html" %}
 
 {% block title %}
-Blog App - Edit Profile
+Blog App - Edit Info
 {% endblock title %}
 
 {% block content %}
 
 {% if user.is_authenticated %}
-    <h1>Edit Your User Info</h1>
-    <br/><br/>
-    <div class="mb-3">
-        <form method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button class="btn btn-primary">Post</button>
-        </form>
-    </div>
-{% else %}
+    {% if user.id == userprofile.id %}
+        <h1>Edit Your User Info</h1>
+        <br/><br/>
+        <div class="mb-3">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button class="btn btn-primary">Post</button>
+            </form>
+        </div>
+    {% else %}
 
-    <strong> You have to be signed in in order to edit your profile!</strong>
+        <strong> You have to be signed in YOUR ACCOUNT in order to edit your profile!</strong>
+
+    {% endif %}
+
+{% else %}
+<strong> You have to be signed in in order to edit your profile!</strong>
 
 {% endif %}
 

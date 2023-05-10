@@ -66,8 +66,11 @@
                   <button class="btn btn-outline-light" type="submit">Search</button>
                 </form>
                 
-<!-- Здесь должна быть кнопка EDIT PROFILE -->
-                
+                <li class="nav-item">
+                  <a class="nav-link active" href="{% url 'edit_profile' %}">
+                    Edit Profile</a>
+                </li>
+            
                 <li class="nav-item">
                   <a class="nav-link active" href="{% url 'logout' %}">
                     {{ user.first_name }} {{ user.last_name }} - Sign out</a>

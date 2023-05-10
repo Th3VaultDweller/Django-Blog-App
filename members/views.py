@@ -27,6 +27,26 @@ class ShowProfilePageView(DetailView):
         context['page_user'] = page_user
         return context
 
+class EditProfilePageView(generic.UpdateView):
+    """Позволяет редактировать профиль пользователя блога."""
+    model = UserProfile
+    template_name = 'registration/edit_profile_page.html'
+    fields = ['bio', 
+              'profile_picture', 
+              'nickname', 
+              'first_name',
+              'last_name',
+              'email_address',
+              'website_url',
+              'vk_url',
+              'twitter_url',
+              'instagram_url',
+              'github_url',
+              'steam_url',
+              'spotify_url'
+              ]   
+    success_url = reverse_lazy('home')
+
 
 class UserRegisterView(generic.CreateView):
     """Форма для регистрации новых пользователей блога."""

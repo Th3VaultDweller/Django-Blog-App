@@ -37,17 +37,6 @@ def CategoryView(request, categories):
                   {'categories': categories.title().replace('-', ' '), 
                    'category_posts': category_posts})
 
-# def CategoryView(request, categories, *args, **kwargs):
-#         """Отображение всех категорий постов в dropdown меню на странице с категориями."""
-#         category_posts = Post.objects.filter(category=categories.replace('-', ' '))
-#         def __init__ (self):
-#             category_menu = Category.objects.all() # достаёт все названия категорий из Category.models.py
-#             context = super(CategoryView, self).get_context_data(*args, **kwargs)
-#             context ['category_menu'] = category_menu
-#             return context, render(request, 'categories.html', 
-#                     {'categories': categories.title().replace('-', ' '), 
-#                     'category_posts': category_posts})
-    
 class ArticleDetailView(DetailView):
     """Отображение детальной информации статьи в блоге."""
     model = Post

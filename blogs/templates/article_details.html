@@ -81,9 +81,9 @@
 <br/>
 <!-- The header of the post -->
 {% if post.header_image %}
-    <img src="{{ post.header_image.url }}">
+    <img src="{{ post.header_image.url }}" class="img-fluid">
+    <br/><br/>
 {% endif%}
-<br/><br/>
 {{ post.body|safe }}
 <br/>
 <br/>

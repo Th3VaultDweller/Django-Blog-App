@@ -14,7 +14,7 @@ Blog App - Edit Info
             <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form.as_p }}
-                <button class="btn btn-primary">Post</button>
+                <button class="btn btn-primary">Save Changes</button>
             </form>
         </div>
     {% else %}

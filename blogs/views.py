@@ -64,6 +64,7 @@ class AddPostView(CreateView):
     model = Post
     form_class = PostForm
     template_name = 'add_post.html'
+    success_url = reverse_lazy('home')
     # fields = '__all__' # выводит на странице создания нового поста все поля для заполнения, указанные в модели Post в models.py
     # fields = ('title', 'body')
 
@@ -94,6 +95,7 @@ class UpdatePostView(UpdateView):
     model = Post
     form_class = UpdatePostForm
     template_name = 'update_post.html'
+    success_url = reverse_lazy('home')
     # fields = ('title', 'body')
 
     def get_context_data(self, *args, **kwargs):

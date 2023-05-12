@@ -37,17 +37,6 @@ def CategoryView(request, categories):
                   {'categories': categories.title().replace('-', ' '), 
                    'category_posts': category_posts})
 
-# def CategoryView(request, categories, *args, **kwargs):
-#         """Отображение всех категорий постов в dropdown меню на странице с категориями."""
-#         category_posts = Post.objects.filter(category=categories.replace('-', ' '))
-#         def __init__ (self):
-#             category_menu = Category.objects.all() # достаёт все названия категорий из Category.models.py
-#             context = super(CategoryView, self).get_context_data(*args, **kwargs)
-#             context ['category_menu'] = category_menu
-#             return context, render(request, 'categories.html', 
-#                     {'categories': categories.title().replace('-', ' '), 
-#                     'category_posts': category_posts})
-    
 class ArticleDetailView(DetailView):
     """Отображение детальной информации статьи в блоге."""
     model = Post
@@ -75,6 +64,7 @@ class AddPostView(CreateView):
     model = Post
     form_class = PostForm
     template_name = 'add_post.html'
+    success_url = reverse_lazy('home')
     # fields = '__all__' # выводит на странице создания нового поста все поля для заполнения, указанные в модели Post в models.py
     # fields = ('title', 'body')
 
@@ -105,6 +95,7 @@ class UpdatePostView(UpdateView):
     model = Post
     form_class = UpdatePostForm
     template_name = 'update_post.html'
+    success_url = reverse_lazy('home')
     # fields = ('title', 'body')
 
     def get_context_data(self, *args, **kwargs):

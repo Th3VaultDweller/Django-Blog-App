@@ -33,7 +33,6 @@
                 </h5>
                     <p class="card-text">
                         <small class="text-body-secondary">
-                            <!-- ЗДЕСЬ НАДО ИСПРАВИТЬ user_profile_page -->
                             <a href="{% url 'user_profile_page' post.author.userprofile.id %}">Profile</a>
                             {% if post.author.userprofile.github_url %}
                                | <a href='{{ post.author.userprofile.github_url }}'>GitHub</a>
@@ -82,9 +81,9 @@
 <br/>
 <!-- The header of the post -->
 {% if post.header_image %}
-    <img src="{{ post.header_image.url }}">
+    <img src="{{ post.header_image.url }}" class="img-fluid">
+    <br/><br/>
 {% endif%}
-<br/><br/>
 {{ post.body|safe }}
 <br/>
 <br/>

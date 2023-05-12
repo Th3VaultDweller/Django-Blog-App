@@ -1,3 +1,4 @@
+{% load static %}
 <!doctype html>
 <html lang="en" dir="ltr">
   <head>
@@ -26,9 +27,9 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
   
               {% if user.is_authenticated %}
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                   <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
-                </li>
+                </li> -->
                 
                 <!-- Меню категорий -->
                 {% if category_menu %}
@@ -60,21 +61,39 @@
                 <li class="nav-item">
                   <a class="nav-link active" href="{% url 'add_category' %}">Add Category</a>
                 </li>
-
-                <form class="d-flex" role="search">
-                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                  <button class="btn btn-outline-light" type="submit">Search</button>
-                </form>
                 
-                <li class="nav-item">
-                  <a class="nav-link active" href="{% url 'edit_profile' %}">
-                    Edit Profile</a>
-                </li>
-            
-                <li class="nav-item">
-                  <a class="nav-link active" href="{% url 'logout' %}">
-                    {{ user.first_name }} {{ user.last_name }} - Sign out</a>
-                </li>
+                <!-- Profile Menu -->
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    {% if user.userprofile.profile_picture.url %}
+                      <img src="{{ user.userprofile.profile_picture.url }}" class="rounded-circle" width="20" height="20">
+                      {{ user.first_name }} {{ user.last_name }}
+                    {% else %}
+                      <img src="{% static 'blogs/images/default_profile_picture.png' %}" class="rounded-circle" width="20" height="20">
+                      {{ user.first_name }} {{ user.last_name }}
+                    {% endif %}
+                  </a>
+                  
+                  <ul class="dropdown-menu">
+                    {% if user.userprofile.id %}
+                      <li><a class="dropdown-item" 
+                        href="{% url 'user_profile_page' user.userprofile.id %}">Profile Page</a></li>
+                      <li><a class="dropdown-item" 
+                        href="{% url 'edit_profile_page' user.userprofile.id %}">Edit Info</a></li>
+                      <li><a class="dropdown-item" 
+                        href="{% url 'edit_profile' %}">Edit Settings</a></li>
+                      <li><a class="dropdown-item" 
+                        href="{% url 'logout' %}">Sign Out</a>
+                      </li>
+                    {% else %}
+                    <li><a class="dropdown-item" 
+                      href="{% url 'create_user_profile_page' %}">Create Profile Page</a>
+                    <li><a class="dropdown-item" 
+                      href="{% url 'logout' %}">Sign Out</a>
+                    </li>
+                    {% endif %}
+                  </ul>
+                </li>               
 
               {% else %}
                 <li class="nav-item">

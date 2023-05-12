@@ -1,16 +1,28 @@
 from typing import Any, Optional
 from django.db import models
+from django.forms.models import BaseModelForm
+from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.views import generic
-from django.views.generic import DetailView
+from django.views.generic import DetailView, CreateView
 from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
 from django.contrib.auth.views import PasswordChangeView
 from django.urls import reverse_lazy
-from .forms import SignUpForm, EditProfileForm, PasswordChangingForm
+from .forms import SignUpForm, EditProfileForm, PasswordChangingForm, ProfilePageForm
 from blogs.models import UserProfile
 
 # Create your views here.
 
+class CreateProfilePageView(CreateView):
+    """Форма для создания профилей новых пользователей блога."""
+    model = UserProfile
+    form_class = ProfilePageForm
+    template_name = 'registration/create_user_profile_page.html'  
+    success_url = reverse_lazy('home')
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 class ShowProfilePageView(DetailView):
     """Показывает профиль пользователя блога."""
@@ -26,6 +38,26 @@ class ShowProfilePageView(DetailView):
                         self).get_context_data(*args, **kwargs)
         context['page_user'] = page_user
         return context
+
+class EditProfilePageView(generic.UpdateView):
+    """Позволяет редактировать профиль пользователя блога."""
+    model = UserProfile
+    template_name = 'registration/edit_profile_page.html'
+    fields = ['bio', 
+              'profile_picture', 
+              'nickname', 
+              'first_name',
+              'last_name',
+              'email_address',
+              'website_url',
+              'vk_url',
+              'twitter_url',
+              'instagram_url',
+              'github_url',
+              'steam_url',
+              'spotify_url'
+              ]   
+    success_url = reverse_lazy('home')
 
 
 class UserRegisterView(generic.CreateView):

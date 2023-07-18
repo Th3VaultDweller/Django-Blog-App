@@ -67,3 +67,12 @@ class Post(models.Model):
         # return reverse('article-detail', args=(str(self.id)))
         return reverse('add_post')
 
+class Comment(models.Model):
+    """Репрезентация секции комментариев под постом."""
+    post = models.ForeignKey(Post, related_name="comments", on_delete=models.CASCADE) # при удалении поста, все комментарии к нему также удаляются - это каскадное удаление
+    name = models.CharField(max_length=255)
+    body = models.TextField()
+    date_added = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return '%s - %s' % (self.post, self.name) # выводит на администраторской странице название поста и имя пользователя, оставившего комментарий

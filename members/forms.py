@@ -103,6 +103,7 @@ class EditProfileForm(UserChangeForm):
 
 
 class PasswordChangingForm(PasswordChangeForm):
+    """Форма смены пароля."""
     old_password = forms.CharField(widget=forms.PasswordInput(
         attrs={'class': 'form-control', 'type': 'password'}))
     new_password1 = forms.CharField(max_length=100, widget=forms.PasswordInput(

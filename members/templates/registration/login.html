@@ -9,10 +9,18 @@ Blog App - Sign In
 <h1>Enter the necessary information to sign in</h1>
 
 <br/><br/>
+
 <div class="mb-3">
     <form method="POST">
         {% csrf_token %}
-        {{ form.as_p }}
+
+        <div class="mb-3">
+            <input type="text" class="form-control" name="username" placeholder="Username">
+        </div>
+ 
+        <div class="mb-3">
+            <input type="password" class="form-control" name="password" placeholder="Password">
+        </div>
         <button class="btn btn-primary">Sign In</button>
     </form>
 </div>

@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import Post, Category
-from .forms import PostForm, UpdatePostForm
+from .models import Post, Category, Comment
+from .forms import PostForm, UpdatePostForm, CommentForm
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
 
@@ -75,6 +75,19 @@ class AddPostView(CreateView):
         context ['category_menu'] = category_menu
         return context
     
+class AddCommentView(CreateView):
+    """Создание нового комментария к посту в блоге."""
+    model = Comment
+    form_class = CommentForm
+    template_name = 'add_comment.html'
+    # success_url = reverse_lazy('article_details')
+    # fields = '__all__' # выводит на странице создания нового поста все поля для заполнения, указанные в модели Post в models.py
+    success_url = reverse_lazy('home')
+    
+    def form_valid(self, form):
+        form.instance.post_id = self.kwargs['pk']
+        return super().form_valid(form)
+
 class AddCategoryView(CreateView):
     """Создание новой категории в блоге."""
     model = Category

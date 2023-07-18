@@ -86,7 +86,6 @@
 {% endif%}
 {{ post.body|safe }}
 <br/>
-<br/>
 <form 
 action="{% url 'like_post' post.pk %}"
 method="POST">
@@ -100,6 +99,26 @@ method="POST">
     {% endif %}
     - {{ total_likes }} Like(s)
 </form>
+<br/>   
+<hr/>
+<a href="{% url 'add_comment' post.pk %}">Add Comment</a>
+<br/><br/>
+{% if not post.comments.all %}
+    There are no comments yet 
+    <br/>
+{% else %}
+    {% for comment in post.comments.all %}
+        {% if user.userprofile.profile_picture.url %}
+            <img src="{{ user.userprofile.profile_picture.url }}" class="rounded-circle" width="20" height="20">
+            {{ user.first_name }} {{ user.last_name }}
+        {% else %}
+            <img src="{% static 'blogs/images/default_profile_picture.png' %}" class="rounded-circle" width="20" height="20">
+            {{ user.first_name }} {{ user.last_name }}
+        {% endif %}
+            - {{ comment.date_added}}
+            <br/><br/>{{ comment.body }}
+    {% endfor %}
+{% endif %}
 
 <br/>
 <br/>

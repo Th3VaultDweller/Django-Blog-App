@@ -1,0 +1,34 @@
+{% extends "base.html" %}   
+
+{% block title %} 
+Blog App - Add a New Comment {{ post.title }} 
+{% endblock title %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+    
+    <h1>Add Comment</h1>
+    <br/><br/>
+    <div class="mb-3">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.media }}
+            {{ form.as_p }}
+            <button class="btn btn-primary">Add Comment</button>
+        </form>
+    </div>
+    
+    <!-- JavaScript-->
+    <script>
+        var name = "{{ user.id }}";
+        document.getElementById("User").value = name;
+    </script>
+
+{% else %}
+
+<strong> You have to be logged in in order to add comments!</strong>
+
+{% endif %}
+
+{% endblock content %}

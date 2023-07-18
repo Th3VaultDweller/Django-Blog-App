@@ -101,10 +101,11 @@ method="POST">
 </form>
 <br/>   
 <hr/>
+<a href="{% url 'add_comment' post.pk %}">Add Comment</a>
+<br/><br/>
 {% if not post.comments.all %}
     There are no comments yet 
     <br/>
-    <a href="#">Be the first one to comment the post!</a>
 {% else %}
     {% for comment in post.comments.all %}
         {% if user.userprofile.profile_picture.url %}

@@ -42,7 +42,7 @@ class Category(models.Model):
 
 class Post(models.Model):
     """Репрезентация поста в блоге."""
-    category = models.CharField(max_length=100, default='it') # категория поста со значением "IT" по умолчанию
+    category = models.CharField(max_length=100, default='it') # категория поста со значением "it" по умолчанию
     # для прикрепления картинок к постам
     header_image = models.ImageField(null=True, 
                                      blank=True, 

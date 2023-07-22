@@ -42,6 +42,11 @@ class Category(models.Model):
 
 class Post(models.Model):
     """Репрезентация поста в блоге."""
+    
+    class Status(models.TextChoices):
+        DRAFT = 'DF', 'Draft'
+        PUBLISHED = 'PB', 'Published'
+    
     category = models.CharField(max_length=100, default='it') # категория поста со значением "it" по умолчанию
     # для прикрепления картинок к постам
     header_image = models.ImageField(null=True, 
@@ -55,6 +60,9 @@ class Post(models.Model):
     body = RichTextField(blank=True, null=True) # "богатое" поле для написания поста
     date_added = models.DateTimeField(auto_now_add=True)
     likes = models.ManyToManyField(User, related_name='blog_posts') # кнопка лайка
+    status = models.CharField(max_length=2,
+                              choices=Status.choices,
+                              default=Status.DRAFT)
 
     def total_likes(self):
         """Считает, сколько всего было поставлено лайков под постом."""

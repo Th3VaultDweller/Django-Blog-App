@@ -73,7 +73,8 @@ class Post(models.Model):
     
     def get_absolute_url(self):
         # return reverse('article-detail', args=(str(self.id)))
-        return reverse('add_post')
+        return reverse('blogs:article_detail',
+                       args=[self.id])
 
 class Comment(models.Model):
     """Репрезентация секции комментариев под постом."""
